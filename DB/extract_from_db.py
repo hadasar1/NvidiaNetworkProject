@@ -1,3 +1,7 @@
+def get_network_dict():
+    pass
+
+
 def match_filter():
     pass
 

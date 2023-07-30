@@ -1,5 +1,4 @@
-from connect_DB import db_connection
-from execute_query import execute_query
+from query import db_connection, execute_query
 
 
 def create_device(ip, mac, network_id):

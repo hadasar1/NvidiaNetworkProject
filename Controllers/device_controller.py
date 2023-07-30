@@ -1,7 +1,7 @@
-def get_filtered_devices():
+def view_filter_devices(network_id, condition):
     pass
 
 
 # NTH
-def get_client_devices():
+def view_client_devices(client_id):
     pass
