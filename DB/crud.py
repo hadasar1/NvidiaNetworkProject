@@ -1,41 +1,41 @@
-from query import db_connection, execute_query
+from DB.query import db_connection, execute_query
 
 
-def create_device(ip, mac, network_id):
-    connection = db_connection()
+async def create_device(ip, mac, vendor, network_id):
     new_device = """
-    INSERT INTO Device (ip,mac,network_id)
-    VALUES (ip,mac,network_id);
+    INSERT into Device (ip,mac,vendor,network_id)
+    VALUES (%s, %s, %s, %s);
     """
-    insert_device = execute_query(connection, new_device)
+    values = (ip, mac, vendor, network_id)
+    insert_device = execute_query(new_device, values)
     return insert_device
 
 
-def create_network(client_id, premise, date_taken):
-    connection = db_connection()
+async def create_network(client_id, premise, date_taken):
     new_network = """
-        INSERT INTO Network (client_id,premise,date_taken)
-        VALUES (client_id,premise,date_taken);
+        INSERT into Network (client_id,premise,date_taken)
+        VALUES (%s, %s, %s);
         """
-    insert_network = execute_query(connection, new_network)
+    values = (client_id, premise, date_taken)
+    insert_network = execute_query(new_network, values)
     return insert_network
 
 
-def create_device_connections(src, destination, protocol, network_id):
-    connection = db_connection()
+async def create_device_connections(src_mac, dest_mac, protocol):
     new_device_connections = """
-           INSERT INTO Device_Connections_table (src,dest,protocol,network_id)
-           VALUES (src,destination,protocol,network_id);
+           INSERT into Device_Connections_table (src_mac,dest_mac,protocol)
+           VALUES (%s, %s, %s);
            """
-    insert_device_connections = execute_query(connection, new_device_connections)
+    values = (src_mac, dest_mac, protocol)
+    insert_device_connections = execute_query(new_device_connections, values)
     return insert_device_connections
 
 
-def create_user_client(user_id, client_id):
-    connection = db_connection()
+async def create_user_client(user_id, client_id):
     new_user_client = """
-            INSERT INTO User_Client (user_id,client_id)
-            VALUES (user_id,client_id);
+            INSERT into User_Client (user_id,client_id)
+            VALUES (%s, %s);
             """
-    insert_user_client = execute_query(connection, new_user_client)
+    values = (user_id, client_id)
+    insert_user_client = execute_query(new_user_client, values)
     return insert_user_client

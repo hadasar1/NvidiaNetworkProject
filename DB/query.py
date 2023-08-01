@@ -1,10 +1,10 @@
 import mysql.connector
 from mysql.connector import Error
 
-HOST = "sql7.freesqldatabase.com"
-USER = "sql7635081"
-PASSWORD = "8hPyFfea3s"
-Database = "sql7635081"
+HOST = "db4free.net"
+USER = "hadas12"
+PASSWORD = "@S2U.jDQGRNg!m5"
+Database = "network_db"
 
 
 def create_server_connection(host_name, user_name, user_password, database):
@@ -26,12 +26,14 @@ def create_server_connection(host_name, user_name, user_password, database):
 db_connection = create_server_connection(HOST, USER, PASSWORD, Database)
 
 
-def execute_query(connection, query):
+def execute_query(query, value, connection=db_connection):
+    id = None
     try:
         cursor = connection.cursor()
-        cursor.execute(query)
+        cursor.execute(query, value)
         connection.commit()
+        id = cursor.lastrowid
         print("Query successful")
     except Error as err:
         print(f"Error: '{err}'")
-    return True
+    return id
